@@ -1,5 +1,6 @@
 package main;
 
+import handlers.Content;
 import handlers.GameStateManager;
 import handlers.InputHandler;
 import handlers.MyInputProcessor;
@@ -21,6 +22,8 @@ public class BlockBunnyGame implements ApplicationListener {
 	protected OrthographicCamera cam;
 	protected OrthographicCamera hudCam;
 
+	public static Content res;
+	
 	private GameStateManager gsm;
 	private float accum;
 	
@@ -38,6 +41,12 @@ public class BlockBunnyGame implements ApplicationListener {
 	
 	@Override
 	public void create() {
+		
+		//texture managing
+		res = new Content();
+		res.loadTexture("res/images/bunny.png", "bunny");
+		res.loadTexture("res/images/crystal.png", "crystal");
+		
 		Gdx.input.setInputProcessor(new MyInputProcessor());
 		sb = new SpriteBatch();
 		cam = new OrthographicCamera();
@@ -61,6 +70,8 @@ public class BlockBunnyGame implements ApplicationListener {
 			gsm.render();
 			InputHandler.update();
 		}
+		
+		sb.setProjectionMatrix(hudCam.combined);
 	}
 
 	@Override

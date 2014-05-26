@@ -8,7 +8,7 @@ public class MyInputProcessor extends InputAdapter {
 	@Override
 	public boolean keyDown(int k){
 		if(k == Keys.D){
-			InputHandler.setKey(InputHandler.BUTTON1, true);
+			InputHandler.setKey(InputHandler.JUMP, true);
 		}
 		if(k == Keys.F){
 			InputHandler.setKey(InputHandler.BUTTON2, true);
@@ -19,7 +19,7 @@ public class MyInputProcessor extends InputAdapter {
 	@Override
 	public boolean keyUp(int k){
 		if(k == Keys.D){
-			InputHandler.setKey(InputHandler.BUTTON1, false);
+			InputHandler.setKey(InputHandler.JUMP, false);
 		}
 		if(k == Keys.F){
 			InputHandler.setKey(InputHandler.BUTTON2, false);

@@ -6,7 +6,7 @@ public class InputHandler {
 	public static boolean[] prevkeys;
 	
 	public static final int NUM_KEYS = 2;
-	public static final int BUTTON1 = 0;
+	public static final int JUMP = 0;
 	public static final int BUTTON2 = 1;
 
 	static {
