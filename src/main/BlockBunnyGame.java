@@ -1,6 +1,8 @@
 package main;
 
 import handlers.GameStateManager;
+import handlers.InputHandler;
+import handlers.MyInputProcessor;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -36,6 +38,7 @@ public class BlockBunnyGame implements ApplicationListener {
 	
 	@Override
 	public void create() {
+		Gdx.input.setInputProcessor(new MyInputProcessor());
 		sb = new SpriteBatch();
 		cam = new OrthographicCamera();
 		cam.setToOrtho(false, V_WIDTH, V_HEIGHT);
@@ -56,6 +59,7 @@ public class BlockBunnyGame implements ApplicationListener {
 			accum -= STEP;
 			gsm.update(STEP);
 			gsm.render();
+			InputHandler.update();
 		}
 	}
 
