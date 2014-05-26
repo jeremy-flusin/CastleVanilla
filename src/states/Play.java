@@ -28,6 +28,7 @@ public class Play extends GameState {
 		world = new World(new Vector2(0, -9.81f), true);
 		b2dr = new Box2DDebugRenderer();
 		
+		//Creating plateform
 		BodyDef bdef = new BodyDef();
 		bdef.position.set(160 / PPM, 120 / PPM);
 		bdef.type = BodyType.StaticBody;
@@ -40,6 +41,7 @@ public class Play extends GameState {
 		fdef.shape = shape;
 		body.createFixture(fdef);
 		
+		//Creating square
 		bdef.position.set(160 / PPM ,200 / PPM);
 		bdef.type = BodyType.DynamicBody;
 		body = world.createBody(bdef);
