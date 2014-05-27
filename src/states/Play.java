@@ -19,12 +19,14 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.ChainShape;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
@@ -32,12 +34,16 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 
 import entities.Crystal;
+import entities.HUD;
 import entities.Player;
 
 public class Play extends GameState {
 
 	private World world;
 	private Player player;
+	private HUD hud;
+	
+	private Array<Crystal> crystals = new Array<Crystal>();
 	private Box2DDebugRenderer b2dr;
 	private OrthographicCamera box2dCam;
 	private MyContactListener contactListener;
@@ -46,7 +52,6 @@ public class Play extends GameState {
 	private float tileSize;
 	private OrthogonalTiledMapRenderer mapRenderer;
 	
-	private Array<Crystal> crystals = new Array<Crystal>();
 	
 	public Play(GameStateManager gsm) {
 		super(gsm);
@@ -59,6 +64,7 @@ public class Play extends GameState {
 		createMap();
 		createPlayer();
 		createCrystals();
+		createHud();
 		
 		//set up box2d cam
 		box2dCam = new OrthographicCamera();
@@ -74,6 +80,47 @@ public class Play extends GameState {
 				player.getBody().applyForceToCenter(0, 150, true);
 			}
 		}
+		if(InputHandler.isPressed(InputHandler.SWITCH_COLOR)){
+			switchColor();
+		}
+	}
+
+	private void switchColor() {
+
+		short newMaskBit;
+		short newMaskBitWithCrystal = 0;
+		short oldMaskBit = player.getBody().getFixtureList().first().getFilterData().maskBits;
+		
+		//removing crystal bit
+		oldMaskBit &= ~B2DVars.BIT_CRYSTAL;
+		
+		switch (oldMaskBit) {
+			case B2DVars.BIT_RED:
+				newMaskBit = B2DVars.BIT_BLUE;
+				break;
+			case B2DVars.BIT_BLUE:
+				newMaskBit = B2DVars.BIT_GREEN;
+				break;
+			case B2DVars.BIT_GREEN:
+				newMaskBit = B2DVars.BIT_RED;
+				break;
+			default:
+				throw new RuntimeException("WTF is happening ??");
+		}
+		
+		//putting the crystal bit
+		newMaskBitWithCrystal = (short) (newMaskBit | B2DVars.BIT_CRYSTAL);
+		
+		Filter filterData = new Filter();
+
+		//player
+		filterData.categoryBits = B2DVars.BIT_PLAYER;
+		filterData.maskBits = newMaskBitWithCrystal;
+		player.getBody().getFixtureList().first().setFilterData(filterData);
+		
+		//foot
+		filterData.maskBits = newMaskBit;
+		player.getBody().getFixtureList().get(1).setFilterData(filterData);
 	}
 
 	@Override
@@ -92,9 +139,7 @@ public class Play extends GameState {
 			world.destroyBody(crystal.getBody());
 			player.collectCrystal();
 		}
-		
 		crystalsToRemove.clear();
-		
 	}
 
 	@Override
@@ -104,10 +149,19 @@ public class Play extends GameState {
 		mapRenderer.setView(cam);
 		mapRenderer.render();
 		
+		cam.position.set(player.getPosition().x * PPM + BlockBunnyGame.V_WIDTH / 4,
+				BlockBunnyGame.V_HEIGHT / 2,
+				0);
+		cam.update();
+		
+		sb.setProjectionMatrix(cam.combined);
 		player.render(sb);
 		for (Crystal crystal: crystals) {
 			crystal.render(sb);
 		}
+		
+		sb.setProjectionMatrix(hudCam.combined);
+		hud.render(sb);
 		
 //		b2dr.render(world, box2dCam.combined);
 	}
@@ -181,7 +235,7 @@ public class Play extends GameState {
 		Body body = null;
 		
 		//Creating player
-		bdef.position.set(160 / PPM ,200 / PPM);
+		bdef.position.set(80 / PPM, 200 / PPM);
 		bdef.type = BodyType.DynamicBody;
 		bdef.linearVelocity.set(0.8f, 0);
 		body = world.createBody(bdef);
@@ -239,6 +293,10 @@ public class Play extends GameState {
 			fixture.setUserData(c);
 			body.setUserData(c);
 		}
+	}
+
+	private void createHud() {
+		hud = new HUD(player);
 	}
 
 }

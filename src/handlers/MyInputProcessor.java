@@ -11,7 +11,7 @@ public class MyInputProcessor extends InputAdapter {
 			InputHandler.setKey(InputHandler.JUMP, true);
 		}
 		if(k == Keys.F){
-			InputHandler.setKey(InputHandler.BUTTON2, true);
+			InputHandler.setKey(InputHandler.SWITCH_COLOR, true);
 		}
 		return true;
 	}
@@ -22,7 +22,7 @@ public class MyInputProcessor extends InputAdapter {
 			InputHandler.setKey(InputHandler.JUMP, false);
 		}
 		if(k == Keys.F){
-			InputHandler.setKey(InputHandler.BUTTON2, false);
+			InputHandler.setKey(InputHandler.SWITCH_COLOR, false);
 		}
 		return true;
 	}

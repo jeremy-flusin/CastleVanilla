@@ -46,6 +46,7 @@ public class BlockBunnyGame implements ApplicationListener {
 		res = new Content();
 		res.loadTexture("res/images/bunny.png", "bunny");
 		res.loadTexture("res/images/crystal.png", "crystal");
+		res.loadTexture("res/images/hud.png", "hud");
 		
 		Gdx.input.setInputProcessor(new MyInputProcessor());
 		sb = new SpriteBatch();

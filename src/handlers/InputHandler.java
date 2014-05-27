@@ -7,7 +7,7 @@ public class InputHandler {
 	
 	public static final int NUM_KEYS = 2;
 	public static final int JUMP = 0;
-	public static final int BUTTON2 = 1;
+	public static final int SWITCH_COLOR = 1;
 
 	static {
 		keys = new boolean[NUM_KEYS];

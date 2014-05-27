@@ -5,54 +5,57 @@
  </tileset>
  <layer name="Red" width="40" height="8">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUDGXAiAOPAsIAAAwsAAc=
+   eJxjYBgFo4D+gBGKRwHlgBEHpsQsfHYMJwAAFZAADg==
   </data>
  </layer>
  <layer name="Blue" width="40" height="8">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2DwAmYCeBSMAkoAADywABk=
+   eJxjYBgFo4C6gJnKZmHDlJo50ACfP7CJU8PfowATAABSoAAo
   </data>
  </layer>
  <layer name="Green" width="40" height="8">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjILBCZhwYGoBAAkIAA0=
+   eJxjYBgFo2B4AyYS1ZKifiQCJiyYXnZRGwAAG2gAGQ==
   </data>
  </layer>
  <objectgroup name="Crystals" width="40" height="8">
-  <object x="54" y="143" width="24" height="24">
+  <object x="139" y="165" width="14" height="15">
    <ellipse/>
   </object>
-  <object x="108" y="122" width="38" height="26">
+  <object x="236" y="82" width="19" height="23">
    <ellipse/>
   </object>
-  <object x="119" y="92" width="20" height="15">
+  <object x="442" y="101" width="17" height="15">
    <ellipse/>
   </object>
-  <object x="184" y="165" width="24" height="12">
+  <object x="474" y="79" width="16" height="16">
    <ellipse/>
   </object>
-  <object x="70" y="89" width="15" height="19">
+  <object x="510" y="98" width="15" height="20">
    <ellipse/>
   </object>
-  <object x="136" y="63" width="19" height="20">
+  <object x="532" y="125" width="13" height="19">
    <ellipse/>
   </object>
-  <object x="171" y="114" width="15" height="22">
+  <object x="665" y="149" width="15" height="19">
    <ellipse/>
   </object>
-  <object x="123" y="164" width="13" height="10">
+  <object x="732" y="117" width="15" height="21">
    <ellipse/>
   </object>
-  <object x="169" y="79" width="10" height="14">
+  <object x="843" y="76" width="16" height="18">
    <ellipse/>
   </object>
-  <object x="197" y="125" width="6" height="17">
+  <object x="974" y="168" width="15" height="14">
    <ellipse/>
   </object>
-  <object x="203" y="77" width="15" height="24">
+  <object x="1115" y="120" width="14" height="16">
    <ellipse/>
   </object>
-  <object x="97" y="49" width="26" height="24">
+  <object x="1178" y="86" width="16" height="15">
+   <ellipse/>
+  </object>
+  <object x="1243" y="57" width="14" height="15">
    <ellipse/>
   </object>
  </objectgroup>
