@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="45" height="28" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="tileset-castle" tilewidth="32" tileheight="32">
+  <image source="tileset-castle.png" width="512" height="512"/>
+ </tileset>
+ <layer name="Map" width="45" height="28">
+  <data encoding="base64" compression="zlib">
+   eJztl0EKwjAQRec+gmfycG49grivVfda614F99qFEzA4hImNENIfmA+fTNMUXoffgRKZTPnUsLeJlmc3om4LMx/Zp0TLswdRd4WZr+xbYN/PVbDulLPOdwBm3881e/FZ3fUZhFnLs/Yev1ya2fd0Tt98ojOHfHuK5xaVuad4blGYZZ4vpM9lud8q96eczw9RLyP7nahnhDOfx3IwdTaM2ZhzMWvzG51Zm9/ozI6vtj47vhr7XNs3iMD8ZL/+8KA8MxRmTv0XHLPJlFtvvNRfdQ==
+  </data>
+ </layer>
+ <layer name="Walls" width="45" height="28" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJztl0EKACAIBPv/E3pt98B0s0xjB7rZOggJtUbIOfqhE+3src3gPM9PmyeddRC3VUYk0py9GTf5xflFBtpP2reWnZx9P0v1dN5zQOvpvOeA1ldwnu/Q2eaQIeNmv4pzrvoGvRleKv4HCcnKABIqSDE=
+  </data>
+ </layer>
+ <layer name="Doors" width="45" height="28" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJzt1dEJADAIA9HsP4SzdoKCSKGJ3JvgzI8SgG3qd8CAc7Nz201ic7JS7uadbrfbEpsB4JXknwMA6DsP+Qdp
+  </data>
+ </layer>
+</map>

@@ -15,6 +15,8 @@ public class B2DSprite {
 	protected AnimationHandler animation;
 	protected float width;
 	protected float height;
+	protected float delay;
+	protected boolean paused;
 	
 	public B2DSprite(Body body) {
 		this.body = body;
@@ -25,10 +27,15 @@ public class B2DSprite {
 		animation.setFrames(frames, delay);
 		height = frames[0].getRegionHeight();
 		width = frames[0].getRegionWidth();
+		this.delay = delay;
+	}
+	
+	public void updateFrames(TextureRegion[] frames){
+		animation.setFrames(frames, delay);
 	}
 	
 	public void update(float dt){
-		animation.update(dt);
+		animation.update(dt, paused);
 	}
 	
 	public void render(SpriteBatch sb){
@@ -56,5 +63,13 @@ public class B2DSprite {
 	
 	public float getHeight(){
 		return height;
+	}
+	
+	public void setPaused(boolean paused){
+		this.paused = paused;
+	}
+	
+	public boolean isPaused(){
+		return this.paused;
 	}
 }

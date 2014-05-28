@@ -30,8 +30,8 @@ public class AnimationHandler {
 		timesPlayed = 0;
 	}
 	
-	public void update(float dt){
-		if(delay > 0){
+	public void update(float dt, boolean paused){
+		if(!paused && delay > 0){
 			time += dt;
 			while(time >= delay){
 				step();

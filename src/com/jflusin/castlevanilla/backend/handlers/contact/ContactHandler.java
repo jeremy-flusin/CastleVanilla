@@ -9,7 +9,7 @@ public class ContactHandler implements ContactListener {
 
 	@Override
 	public void beginContact(Contact contact) {
-
+		
 	}
 
 	@Override

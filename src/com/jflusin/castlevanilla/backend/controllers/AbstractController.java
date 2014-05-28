@@ -22,4 +22,8 @@ public abstract class AbstractController {
 	public AbstractModel getModel() {
 		return model;
 	}
+
+	public void handleInput() {
+		
+	}
 }

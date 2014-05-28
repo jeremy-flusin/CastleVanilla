@@ -5,15 +5,16 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.jflusin.castlevanilla.backend.handlers.inputs.InputHandler;
+import com.jflusin.castlevanilla.backend.handlers.inputs.InputProcessor;
 import com.jflusin.castlevanilla.backend.utils.SceneManager;
 
 public class Game implements ApplicationListener {
 
 	public static final String TITLE = "CastleVanilla";
 	public static final String VERSION = "p-o-c";
-	public static final int V_WIDTH = 720;
-	public static final int V_HEIGHT = 500;
-	public static final int SCALE = 2;
+	public static final int V_WIDTH = 1440;
+	public static final int V_HEIGHT = 896;
+	public static final int SCALE = 1;
 	public static final float STEP = 1/60f;
 	
 	private float accum;
@@ -25,15 +26,16 @@ public class Game implements ApplicationListener {
 	
 	@Override
 	public void create() {
+		
+		//Main camera
+		cam = new OrthographicCamera();
+		cam.setToOrtho(false, V_WIDTH, V_HEIGHT);
 
 		//Initializations
 		sb = new SpriteBatch();
 		sm = new SceneManager(this);
 		sm.setState(SceneManager.TEST_SCENE);
-		
-		//Main camera
-		cam = new OrthographicCamera();
-		cam.setToOrtho(false, V_WIDTH, V_HEIGHT);
+		Gdx.input.setInputProcessor(new InputProcessor());
 		
 	}
 
