@@ -14,7 +14,9 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.jflusin.castlevanilla.backend.controllers.HumanController;
+import com.jflusin.castlevanilla.backend.handlers.PlayerMovement;
 import com.jflusin.castlevanilla.backend.handlers.animation.B2DSprite;
+import com.jflusin.castlevanilla.backend.utils.map.Frame;
 import com.jflusin.castlevanilla.backend.views.scenes.AbstractScene;
 
 public class HumanEntity extends AbstractEntity {
@@ -25,7 +27,7 @@ public class HumanEntity extends AbstractEntity {
 	public static final int LOOKS_UP = 3; 
 	
 	private ArrayList<TextureRegion[]> orientedSprites;
-	private Body body;
+	private PlayerMovement movement;
 	
 	public HumanEntity(AbstractScene scene) {
 		super(scene);
@@ -35,13 +37,13 @@ public class HumanEntity extends AbstractEntity {
 	B2DSprite sprite;
 	
 	@Override
-	public void createInto(World world) {
+	public void createInto(World world, Frame spawn) {
 		BodyDef bdef = new BodyDef();
 		bdef.type = BodyType.DynamicBody;
-		bdef.position.set(100/PPM, 100/PPM);
+		bdef.position.set(spawn.getX(), spawn.getY());
 		FixtureDef fdef = new FixtureDef();
 		PolygonShape shape = new PolygonShape();
-		shape.setAsBox(16/PPM, 16/PPM);
+		shape.setAsBox(spawn.getWidth()/ 2 /PPM, spawn.getHeight()/ 2 /PPM);
 		fdef.shape = shape;
 		fdef.friction = 0;
 		body = world.createBody(bdef);
@@ -71,15 +73,33 @@ public class HumanEntity extends AbstractEntity {
 	@Override
 	public void update(float dt) {
 		sprite.update(dt);
+		
+		if(getMovement().isMoving()){
+			boolean arrived = getController().moveTowards(getMovement().getCurrentDest());
+			getMovement().setMoving(!arrived);
+		}else{
+			if(!getMovement().isArrived()){
+				getMovement().step();
+				getMovement().setMoving(true);
+			}
+		}
 	}
 
+	public PlayerMovement getMovement() {
+		if(movement != null){
+			return movement;
+		} else {
+			return new PlayerMovement(false, null);
+		}
+	}
+	
+	public void setMovement(PlayerMovement movement) {
+		this.movement = movement;
+	}
+	
 	@Override
 	public void render(SpriteBatch sb) {
 		sprite.render(sb);
-	}
-	
-	public Body getBody() {
-		return body;
 	}
 	
 	public void setDirection(int direction){
@@ -99,5 +119,10 @@ public class HumanEntity extends AbstractEntity {
 		default:
 			break;
 		}
+	}
+	
+	@Override
+	public Body getBody() {
+		return body;
 	}
 }
