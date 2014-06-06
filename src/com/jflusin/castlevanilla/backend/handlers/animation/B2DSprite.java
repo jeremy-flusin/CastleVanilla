@@ -16,7 +16,6 @@ public class B2DSprite {
 	protected float width;
 	protected float height;
 	protected float delay;
-	protected boolean paused;
 	
 	public B2DSprite(Body body) {
 		this.body = body;
@@ -34,7 +33,7 @@ public class B2DSprite {
 		animation.setFrames(frames, delay);
 	}
 	
-	public void update(float dt){
+	public void update(float dt, boolean paused){
 		animation.update(dt, paused);
 	}
 	
@@ -63,13 +62,5 @@ public class B2DSprite {
 	
 	public float getHeight(){
 		return height;
-	}
-	
-	public void setPaused(boolean paused){
-		this.paused = paused;
-	}
-	
-	public boolean isPaused(){
-		return this.paused;
 	}
 }

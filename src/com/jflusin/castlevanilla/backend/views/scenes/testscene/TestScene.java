@@ -65,13 +65,9 @@ public class TestScene extends AbstractScene {
 
 		createMap();
 
-		mapFrames.addAll(createFramesFromTilesInLayer("Room 1", true));
 		mapFrames.addAll(createFramesFromTilesInLayer("Doors", true));
+		mapFrames.addAll(createFramesFromTilesInLayer("Ground", true));
 		mapFrames.addAll(createFramesFromTilesInLayer("Walls", false));
-		mapFrames.addAll(createFramesFromTilesInLayer("Room 2", true));
-		mapFrames.addAll(createFramesFromTilesInLayer("Room 3", true));
-		mapFrames.addAll(createFramesFromTilesInLayer("Room 4", true));
-		mapFrames.addAll(createFramesFromTilesInLayer("Room 5", true));
 		ArrayList<Frame> dest = createFramesFromTilesInLayer("Dest", true);
 		spawns = createFramesFromTilesInLayer("Spawns", true);
 		createPlayers();
@@ -82,7 +78,7 @@ public class TestScene extends AbstractScene {
 		PathFinder pf = new PathFinder(mapFrames, playerFrame,
 				dest.get(0));
 		ArrayList<Node> path = pf.findPath();
-		PlayerMovement movement = new PlayerMovement(true, path);
+		PlayerMovement movement = new PlayerMovement(path);
 		human.setMovement(movement);
 	}
 

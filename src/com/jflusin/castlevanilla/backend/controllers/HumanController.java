@@ -3,12 +3,15 @@ package com.jflusin.castlevanilla.backend.controllers;
 import com.jflusin.castlevanilla.backend.handlers.inputs.InputHandler;
 import com.jflusin.castlevanilla.backend.models.AbstractModel;
 import com.jflusin.castlevanilla.backend.models.HumanPlayer;
+import com.jflusin.castlevanilla.backend.utils.B2DVars;
 import com.jflusin.castlevanilla.backend.utils.map.Frame;
 import com.jflusin.castlevanilla.backend.views.entities.AbstractEntity;
 import com.jflusin.castlevanilla.backend.views.entities.HumanEntity;
 
 public class HumanController extends AbstractController {
 
+	public float velocity = 0.1f * B2DVars.FRAMEWIDTH;
+	
 	public HumanController(AbstractEntity entity, AbstractModel model) {
 		super(entity, model);
 	}
@@ -63,20 +66,22 @@ public class HumanController extends AbstractController {
 			float xTransform = 0f;
 			float yTransform = 0f;
 			if(destX > x + 0.01f){
-				xTransform = 0.04f;
+				xTransform = velocity;
 				getEntity().setDirection(HumanEntity.LOOKS_RIGHT);
 				arrived = false;
 			} else if (destX < x - 0.01f){
-				xTransform = -0.04f;
+				xTransform = -velocity;
 				getEntity().setDirection(HumanEntity.LOOKS_LEFT);
 				arrived = false;
-			} else if (destY > y + 0.01f){
-				yTransform = 0.04f;
+			}	
+			
+			if (destY > y + 0.01f){
+				yTransform = velocity;
 				getEntity().setDirection(HumanEntity.LOOKS_UP);
 				arrived = false;
 			} else if (destY < y - 0.01f){
-				yTransform = -0.04f;
-				getEntity().setDirection(HumanEntity.LOOKS_LEFT);
+				yTransform = -velocity;
+				getEntity().setDirection(HumanEntity.LOOKS_DOWN);
 				arrived = false;
 			}
 			getEntity().getBody().setTransform(x + xTransform, y + yTransform, 0);

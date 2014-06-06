@@ -28,6 +28,7 @@ public class HumanEntity extends AbstractEntity {
 	
 	private ArrayList<TextureRegion[]> orientedSprites;
 	private PlayerMovement movement;
+	private boolean moving;
 	
 	public HumanEntity(AbstractScene scene) {
 		super(scene);
@@ -72,25 +73,27 @@ public class HumanEntity extends AbstractEntity {
 
 	@Override
 	public void update(float dt) {
-		sprite.update(dt);
-		
-		if(getMovement().isMoving()){
-			boolean arrived = getController().moveTowards(getMovement().getCurrentDest());
-			getMovement().setMoving(!arrived);
-		}else{
-			if(!getMovement().isArrived()){
-				getMovement().step();
-				getMovement().setMoving(true);
+		sprite.update(dt, !moving);
+		handleMovement();
+	}
+
+	private void handleMovement() {
+		if(movement != null){
+			if(!moving){
+				movement.step();
+				moving = true;
+			}
+			if(!movement.isArrived()){
+				moving = !getController().moveTowards(
+						movement.getCurrentDest());
+			}else{
+				moving = false;
 			}
 		}
 	}
 
 	public PlayerMovement getMovement() {
-		if(movement != null){
-			return movement;
-		} else {
-			return new PlayerMovement(false, null);
-		}
+		return movement;
 	}
 	
 	public void setMovement(PlayerMovement movement) {

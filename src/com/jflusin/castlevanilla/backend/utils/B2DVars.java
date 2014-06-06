@@ -9,7 +9,7 @@ public class B2DVars {
 	public static final float FRAMEWIDTH = 0.32f;
 	
 	//Precision
-	public static final float PRECISION = 0.01f;
+	public static final float PRECISION = 0.1f;
 	
 	//Category Bits
 	public static final short PLAYER = 2;

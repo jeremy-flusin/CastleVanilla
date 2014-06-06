@@ -7,23 +7,13 @@ import com.jflusin.castlevanilla.backend.utils.map.astar.Node;
 
 public class PlayerMovement {
 
-	private boolean isMoving = false;
 	private ArrayList<Node> path;
 	private int step = 0;
 	
-	public PlayerMovement(boolean isMoving, ArrayList<Node> path) {
-		this.isMoving = isMoving;
+	public PlayerMovement(ArrayList<Node> path) {
 		this.path = path;
 	}
 	
-	public void setMoving(boolean isMoving) {
-		this.isMoving = isMoving;
-	}
-	
-	public boolean isMoving() {
-		return isMoving;
-	}
-
 	public void setPath(ArrayList<Node> path) {
 		this.path = path;
 	}
@@ -45,6 +35,6 @@ public class PlayerMovement {
 	}
 
 	public boolean isArrived() {
-		return step >= path.size() - 1;
+		return step >= path.size();
 	}
 }
