@@ -3,29 +3,64 @@
  <tileset firstgid="1" name="tileset-castle" tilewidth="32" tileheight="32">
   <image source="tileset-castle.png" width="512" height="512"/>
  </tileset>
- <layer name="Ground" width="45" height="28">
+ <layer name="Background" width="45" height="28">
   <data encoding="base64" compression="zlib">
-   eJzt0lEKwDAIA9De/1A9235HUeskzggG8rENulfbvdbaU7O3VPs0s/bM6j5d1h6YejMj3chYc0WbM+cs7YnVnGGN3o2vc86otr70fsz/m6V0MHec85ix5nfO79a3CrPkkczeNZFmLZ57UmGOnkUHsxR2c+QMKuboTZWZeT30P7yzZ78b0ymyD2oyGlI=
+   eJzt0lEKwDAIA9De/1A9235HidZJnAoG8rGVjVfbvdbaU7W3ZPsks/Rc1X26tD1U6s3MdDOjzZVtjpwz2lNVc4TVeze+zjmi0v/R+zH/b0bpYO445zFzze+c69pahhl5kNn6T6ZZiuWeZJi9Z9HBjFLd7DmDjDlak2VmftvBbJl99bsxnTL7AJidGZQ=
   </data>
  </layer>
  <layer name="Walls" width="45" height="28">
   <data encoding="base64" compression="zlib">
-   eJztlkEKwCAMBP3/e+z/eupl0c1at5hCBqQFaRzTYGytiOjByAh6dXjP6I1ebA+ZYF7uXEe1uDKYv9vZHWdUzxmdMeaX5wbGHq2nrB/VhpNZ/NWaLGfOijPOY+2o3+6yEl/tG5nyXM7vUZxZr1P7oBPmzM7lDk8lpovd+8MJZ4W/Os/+Q1bni8ydcnbdmx/YHl2485LdWc29G3dtFIWTG9WxgLA=
+   eJztllEKwCAMQ73/eXrA/Y6gbTrj1kEfyARZfHNFHaOJsKBVBL0M+hW90cv7hkp4Xuq1jmox0zx/tbM6Z1bPFZ0x8+S+gdmz+Zj5o9pQssrP1mQ7+2SccRxrh313l0w+e25UWud2fg7j7J117DmoxHP29mWDJ5OpYvf+8IUzw1+dV/+hsnNm7A1n1b35nnca9RzVndm1V6OujaZRcgHIPYCt
   </data>
  </layer>
  <layer name="Doors" width="45" height="28">
   <data encoding="base64" compression="zlib">
-   eJzt0zERAEAIA0H863ihb4CCghlS7BogxVEFbHnXA4hy1UN3V5tMpLeTtAXo+VMA2PEB/mEFIQ==
+   eJzt07ENADAIA0H23yJSBs0CFCmQTHG3AC6eKmDKTQ9glVQP3V1t8mN7O5u2AD1/CnknPQAY8QBh2gXC
+  </data>
+ </layer>
+ <layer name="Room0" width="45" height="28" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJztzrENADAIBDH2XzVLsEDqByRbuv6qAGDG+7Sd5wzPGZ4zLj4DALMaT7gkuQ==
+  </data>
+ </layer>
+ <layer name="Room1" width="45" height="28" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJzt1LEJADAMA0Hvv2qWSOUBArFBcAfqv1IVwKzzYdsSm19o3pHcnETzDs2zkn6iaQaAORdFkUPv
+  </data>
+ </layer>
+ <layer name="Room2" width="45" height="28" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJzt0MEJADAMA7Hsv2qX6Dd0gFAHCfw/XAUAfznPEmie0VvTmhN/TmwGANjgAjrtFvQ=
+  </data>
+ </layer>
+ <layer name="Room3" width="45" height="28" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJztzrEJAEAIwED3X9UlfgJBbF7wDtInAgAA4Kb8PTCw/TmLAOh7kBAHWQ==
+  </data>
+ </layer>
+ <layer name="Room4" width="45" height="28" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJztzrEJADAMBDHvv2qWSGXIACbwRoLrrwoAYIfzlMLzH0mvLfEZAJhxASPJCho=
+  </data>
+ </layer>
+ <layer name="Room5" width="45" height="28" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJztzrEJAAAIBLHff1WXcAcbFRK4/hIAAADgkhq26eMzXNWqRRm1
+  </data>
+ </layer>
+ <layer name="Room6" width="45" height="28" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJzt1rENADEMAzHvv2qWSPsTXOAHCai/UjP81flsE80NzQ3NDc0NzQ3NjU3NZ/b9Os0NzQ3NwAsXh0k0VA==
+  </data>
+ </layer>
+ <layer name="Room7" width="45" height="28" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJztzrENADAMwzD//2qeyNIHOhohAe1KuGJeTSZ93+3PLd9NrwAAAPBjAYWjDNs=
   </data>
  </layer>
  <layer name="Spawns" width="45" height="28">
   <data encoding="base64" compression="zlib">
-   eJztzjENAAAIA7D594cfROwgIa2CJgAAAACduQ7AIwvVXgDW
-  </data>
- </layer>
- <layer name="Dest" width="45" height="28">
-  <data encoding="base64" compression="zlib">
-   eJztzjEBAAAIA6D1L2oNW0wPSEACAAC0zHUAAHhvAXdpAOg=
+   eJzt00sRACAMA9H61wd+cMCp0zDLPgVJP1WSuq10AI277dx7kPrR/orWZ4IzewNxD8ROSc7zLzsdQAI53QAISg==
   </data>
  </layer>
 </map>

@@ -6,6 +6,28 @@ import com.badlogic.gdx.InputAdapter;
 public class InputProcessor extends InputAdapter {
 
 	@Override
+	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		if(button == 0){
+			InputHandler.setClick(0, screenX, screenY, true);
+		}
+		if(button == 1){
+			InputHandler.setClick(1, screenX, screenY, true);
+		}
+		return true;
+	}
+	
+	@Override
+	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		if(button == 0){
+			InputHandler.setClick(0, screenX, screenY, false);
+		}
+		if(button == 1){
+			InputHandler.setClick(1, screenX, screenY, false);
+		}
+		return true;
+	}
+	
+	@Override
 	public boolean keyDown(int k){
 		if(k == Keys.UP){
 			InputHandler.setKey(InputHandler.UP, true);

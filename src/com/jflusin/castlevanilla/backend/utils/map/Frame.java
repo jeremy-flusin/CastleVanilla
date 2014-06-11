@@ -1,5 +1,7 @@
 package com.jflusin.castlevanilla.backend.utils.map;
 
+import com.jflusin.castlevanilla.backend.utils.B2DVars;
+
 
 public class Frame {
 
@@ -74,5 +76,29 @@ public class Frame {
 	public void setWidth(float width) {
 		this.width = width;
 	}
+
+	public boolean isAdjacentWith(Frame frame){
+		
+		boolean result = false;
+		float diffX = Math.abs(getX() - frame.getX());
+		float diffY = Math.abs(getY() - frame.getY());
+		
+		if(
+				((diffX > 0 && diffX < B2DVars.FRAMEWIDTH + B2DVars.PRECISION)
+						&&
+				 (diffY == 0))
+				 ||
+				 ((diffY > 0 && diffY < B2DVars.FRAMEWIDTH + B2DVars.PRECISION)
+				 		&&
+				 (diffX == 0))
+		){
+			result = true;
+		}
+		
+		return result;
+	}
 	
+	public boolean isSameCoodinatesAs(Frame frame){
+		return x == frame.getX() && y == frame.getY();
+	}
 }

@@ -17,19 +17,21 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.jflusin.castlevanilla.backend.factory.HumanFactory;
-import com.jflusin.castlevanilla.backend.handlers.PlayerMovement;
 import com.jflusin.castlevanilla.backend.handlers.contact.ContactHandler;
+import com.jflusin.castlevanilla.backend.handlers.inputs.InputHandler;
 import com.jflusin.castlevanilla.backend.main.Game;
 import com.jflusin.castlevanilla.backend.utils.SceneManager;
 import com.jflusin.castlevanilla.backend.utils.map.Frame;
-import com.jflusin.castlevanilla.backend.utils.map.astar.Node;
-import com.jflusin.castlevanilla.backend.utils.map.astar.PathFinder;
+import com.jflusin.castlevanilla.backend.utils.map.Room;
 import com.jflusin.castlevanilla.backend.views.entities.HumanEntity;
 import com.jflusin.castlevanilla.backend.views.entities.VampireEntity;
 import com.jflusin.castlevanilla.backend.views.scenes.AbstractScene;
 
 public class TestScene extends AbstractScene {
 
+	// Constants
+	private static final int TOTAL_ROOMS = 8;
+	
 	// Debug renderer & camera
 	private Box2DDebugRenderer b2dr;
 	private OrthographicCamera b2dcam;
@@ -46,9 +48,10 @@ public class TestScene extends AbstractScene {
 	private TiledMap tileMap;
 	private float tileSize;
 	private OrthogonalTiledMapRenderer mapRenderer;
-	private ArrayList<Frame> mapFrames;
 	ArrayList<Frame> spawns;
-
+	ArrayList<Frame> doors;
+	ArrayList<Room> rooms;
+	
 	public TestScene(SceneManager sm) {
 		super(sm);
 
@@ -61,25 +64,36 @@ public class TestScene extends AbstractScene {
 		contactHandler = new ContactHandler();
 		world = new World(new Vector2(0, 0f), true);
 		world.setContactListener(contactHandler);
-		mapFrames = new ArrayList<Frame>();
 
 		createMap();
 
-		mapFrames.addAll(createFramesFromTilesInLayer("Doors", true));
-		mapFrames.addAll(createFramesFromTilesInLayer("Ground", true));
-		mapFrames.addAll(createFramesFromTilesInLayer("Walls", false));
-		ArrayList<Frame> dest = createFramesFromTilesInLayer("Dest", true);
+		doors = createFramesFromTilesInLayer("Doors", true);
 		spawns = createFramesFromTilesInLayer("Spawns", true);
-		createPlayers();
+		rooms = new ArrayList<Room>();
 		
-		Frame playerFrame = new Frame(human.getBody().getPosition().x,
-				human.getBody().getPosition().y);
-			
-		PathFinder pf = new PathFinder(mapFrames, playerFrame,
-				dest.get(0));
-		ArrayList<Node> path = pf.findPath();
-		PlayerMovement movement = new PlayerMovement(path);
-		human.setMovement(movement);
+		for(int i = 0; i < TOTAL_ROOMS; i++){
+			ArrayList<Frame> groundFrames = createFramesFromTilesInLayer("Room" + i, true);
+			Room room = new Room("Room" + i, groundFrames);
+			//Adding doors
+			for(Frame door: doors){
+				for(Frame groundFrame: groundFrames){
+					if (door.isAdjacentWith(groundFrame)){
+						room.addDoor(door);
+					}
+				}
+			}
+			//Adding spawns
+			for(Frame spawn: spawns){
+				for(Frame groundFrame: groundFrames){
+					if (spawn.isSameCoodinatesAs(groundFrame)){
+						room.addSpawn(spawn);
+					}
+				}
+			}
+			rooms.add(room);
+		}
+
+		createPlayers();
 	}
 
 	private ArrayList<Frame> createFramesFromTilesInLayer(String layerName,
@@ -87,22 +101,26 @@ public class TestScene extends AbstractScene {
 		ArrayList<Frame> frames = new ArrayList<Frame>();
 		TiledMapTileLayer layer = (TiledMapTileLayer) tileMap.getLayers().get(
 				layerName);
-		tileSize = layer.getTileWidth();
-
-		for (int row = 0; row < layer.getHeight(); row++) {
-			for (int col = 0; col < layer.getWidth(); col++) {
-
-				Cell cell = layer.getCell(col, row);
-
-				if (cell != null && cell.getTile() != null) {
-					Frame frame = new Frame((col + 0.5f) * tileSize / PPM,
-							(row + 0.5f) * tileSize / PPM, tileSize, tileSize,
-							walkable);
-					frames.add(frame);
+		if(layer != null){
+			tileSize = layer.getTileWidth();
+	
+			for (int row = 0; row < layer.getHeight(); row++) {
+				for (int col = 0; col < layer.getWidth(); col++) {
+	
+					Cell cell = layer.getCell(col, row);
+	
+					if (cell != null && cell.getTile() != null) {
+						Frame frame = new Frame((col + 0.5f) * tileSize / PPM,
+								(row + 0.5f) * tileSize / PPM, tileSize, tileSize,
+								walkable);
+						frames.add(frame);
+					}
 				}
 			}
+			return frames;
+		}else{
+			throw new RuntimeException("Layer: " + layerName + " could not be found in map !");
 		}
-		return frames;
 	}
 
 	private void createMap() {
@@ -134,6 +152,14 @@ public class TestScene extends AbstractScene {
 		world.step(dt, 6, 2);
 		handleInput();
 		human.update(dt);
+		
+		if(InputHandler.isClicked(0)){
+			System.out.println("Mouse left-clicked at: (" + InputHandler.mouseX + ";" + InputHandler.mouseY +")");
+		}
+		
+		if(InputHandler.isClicked(1)){
+			System.out.println("Mouse right-clicked at: (" + InputHandler.mouseX + ";" + InputHandler.mouseY +")");
+		}
 	}
 
 	@Override

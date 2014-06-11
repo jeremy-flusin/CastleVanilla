@@ -108,19 +108,7 @@ public class PathFinder {
 	private ArrayList<Node> getAdjacentNodes(Node current) {
 		ArrayList<Node> adjacentNodes = new ArrayList<Node>();
 		for(Node node : map){
-			
-			float diffX = Math.abs(current.getX() - node.getX());
-			float diffY = Math.abs(current.getY() - node.getY());
-			
-			if(
-					((diffX > 0 && diffX < B2DVars.FRAMEWIDTH + B2DVars.PRECISION)
-							&&
-					 (diffY == 0))
-					 ||
-					 ((diffY > 0 && diffY < B2DVars.FRAMEWIDTH + B2DVars.PRECISION)
-					 		&&
-					 (diffX == 0))
-			){
+			if(current.isAdjacentWith(node)){
 				adjacentNodes.add(node);
 			}
 		}
