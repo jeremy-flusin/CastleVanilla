@@ -7,9 +7,9 @@ import com.jflusin.castlevanilla.backend.views.scenes.AbstractScene;
 
 public abstract class VampireFactory {
 
-	public static VampireController getInstance(AbstractScene scene){
+	public static VampireController getInstance(AbstractScene scene, String nickname){
 		VampireEntity entity = new VampireEntity(scene);
-		VampirePlayer model = new VampirePlayer();
+		VampirePlayer model = new VampirePlayer(nickname);
 		return new VampireController(entity, model);
 	}
 	

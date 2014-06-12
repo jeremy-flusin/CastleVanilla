@@ -1,13 +1,11 @@
 package com.jflusin.castlevanilla.backend.controllers;
 
-import com.jflusin.castlevanilla.backend.models.AbstractModel;
 import com.jflusin.castlevanilla.backend.models.VampirePlayer;
-import com.jflusin.castlevanilla.backend.views.entities.AbstractEntity;
 import com.jflusin.castlevanilla.backend.views.entities.VampireEntity;
 
-public class VampireController extends AbstractController {
+public class VampireController extends PlayerController {
 
-	public VampireController(AbstractEntity entity, AbstractModel model) {
+	public VampireController(VampireEntity entity, VampirePlayer model) {
 		super(entity, model);
 	}
 	

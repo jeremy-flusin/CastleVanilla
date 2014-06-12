@@ -7,9 +7,9 @@ import com.jflusin.castlevanilla.backend.views.scenes.AbstractScene;
 
 public abstract class HumanFactory {
 
-	public static HumanController getInstance(AbstractScene scene){
+	public static HumanController getInstance(AbstractScene scene, String nickname){
 		HumanEntity entity = new HumanEntity(scene);
-		HumanPlayer model = new HumanPlayer();
+		HumanPlayer model = new HumanPlayer(nickname);
 		return new HumanController(entity, model);
 	}
 	

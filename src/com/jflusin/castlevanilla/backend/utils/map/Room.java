@@ -6,14 +6,14 @@ public class Room {
 
 	private String name;
 	private ArrayList<Frame> groundFrames;
-	private ArrayList<Frame> doors;
-	private ArrayList<Frame> spawns;
+	private ArrayList<Door> doors;
+	private ArrayList<Spawn> spawns;
 
 	public Room(String name, ArrayList<Frame> groundFrames) {
 		this.name = name;
 		this.groundFrames = groundFrames;
-		doors = new ArrayList<Frame>();
-		spawns = new ArrayList<Frame>();
+		doors = new ArrayList<Door>();
+		spawns = new ArrayList<Spawn>();
 	}
 	
 	public String getName() {
@@ -24,31 +24,19 @@ public class Room {
 		return groundFrames;
 	}
 	
-	public ArrayList<Frame> getDoors() {
+	public ArrayList<Door> getDoors() {
 		return doors;
 	}
 	
-	public ArrayList<Frame> getSpawns() {
+	public ArrayList<Spawn> getSpawns() {
 		return spawns;
 	}
 	
-	public void addDoor(Frame door){
+	public void addDoor(Door door){
 		doors.add(door);
 	}
 	
-	public void addSpawn(Frame spawn){
+	public void addSpawn(Spawn spawn){
 		spawns.add(spawn);
-	}
-	
-	public Frame getDoorToRoom(Room destination){
-		for(Frame destDoor: destination.getDoors()){
-			for(Frame localDoor: getDoors()){
-				if(destDoor.getX() == localDoor.getX() &&
-						destDoor.getY() == localDoor.getY()){
-					return localDoor;
-				}
-			}
-		}
-		return null;
 	}
 }

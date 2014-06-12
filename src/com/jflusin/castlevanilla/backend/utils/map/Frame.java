@@ -8,8 +8,8 @@ public class Frame {
 	private float x = 0;
 	private float y = 0;
 	private boolean walkable = true;
-	private float width = 0;
-	private float height = 0;
+	private float width = B2DVars.FRAMEWIDTH;
+	private float height = B2DVars.FRAMEWIDTH;
 
 	public Frame(float x, float y) {
 		this.x = x;

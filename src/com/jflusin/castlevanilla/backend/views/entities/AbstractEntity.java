@@ -9,8 +9,8 @@ import com.jflusin.castlevanilla.backend.views.scenes.AbstractScene;
 
 public abstract class AbstractEntity {
 	
-	private AbstractController controller;
-	private AbstractScene scene;
+	protected AbstractController controller;
+	protected AbstractScene scene;
 	protected Body body;
 	
 	public AbstractEntity(AbstractScene scene) {
@@ -28,7 +28,7 @@ public abstract class AbstractEntity {
 	public AbstractController getController() {
 		return controller;
 	}
-
+	
 	public abstract void createInto(World world, Frame spawn);
 	
 	public abstract void update(float dt);
