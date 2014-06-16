@@ -18,9 +18,4 @@ public class HumanController extends PlayerController {
 	public HumanPlayer getModel() {
 		return (HumanPlayer)super.getModel();
 	}
-
-	@Override
-	public void handleInput() {
-
-	}
 }

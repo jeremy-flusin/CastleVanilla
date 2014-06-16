@@ -10,6 +10,7 @@ import com.jflusin.castlevanilla.backend.utils.SceneManager;
 
 public class Game implements ApplicationListener {
 
+	public static final boolean IS_DEBUG = true;
 	public static final String TITLE = "CastleVanilla";
 	public static final String VERSION = "p-o-c";
 	public static final int V_WIDTH = 1440;

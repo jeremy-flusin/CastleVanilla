@@ -3,6 +3,7 @@ package com.jflusin.castlevanilla.backend.views.entities;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.jflusin.castlevanilla.backend.controllers.PlayerController;
 import com.jflusin.castlevanilla.backend.handlers.PlayerMovement;
 import com.jflusin.castlevanilla.backend.handlers.animation.B2DSprite;
 import com.jflusin.castlevanilla.backend.views.scenes.AbstractScene;
@@ -42,5 +43,38 @@ public abstract class PlayerEntity extends AbstractEntity {
 		default:
 			break;
 		}
+	}
+	
+	@Override
+	public void update(float dt) {
+		handleMovement();
+	}
+	
+	private void handleMovement() {
+		if(movement != null){
+			if(!moving){
+				movement.step();
+				moving = true;
+			}
+			if(!movement.isArrived()){
+				moving = !getController().moveTowards(
+						movement.getCurrentDest());
+			}else{
+				moving = false;
+			}
+		}
+	}
+
+	public PlayerMovement getMovement() {
+		return movement;
+	}
+	
+	public void setMovement(PlayerMovement movement) {
+		this.movement = movement;
+	}
+	
+	@Override
+	public PlayerController getController() {
+		return (PlayerController)super.getController();
 	}
 }

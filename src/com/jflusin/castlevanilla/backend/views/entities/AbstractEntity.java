@@ -29,6 +29,12 @@ public abstract class AbstractEntity {
 		return controller;
 	}
 	
+	public Frame getCurrentFrame(){
+		float x = getBody().getPosition().x;
+		float y = getBody().getPosition().y;
+		return new Frame(x, y);
+	}
+	
 	public abstract void createInto(World world, Frame spawn);
 	
 	public abstract void update(float dt);

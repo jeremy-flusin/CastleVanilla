@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import com.jflusin.castlevanilla.backend.controllers.PlayerController;
+import com.jflusin.castlevanilla.backend.main.Game;
 
 public class TurnManager {
 
@@ -33,7 +34,9 @@ public class TurnManager {
 				changeTeam();
 			}
 		}
-		System.out.println("Player turn: " + getCurrentPlayer().getModel().getNickname());
+		if(Game.IS_DEBUG){
+			System.out.println("[Turn Manager] Player turn: " + getCurrentPlayer().getModel().getNickname());
+		}
 	}
 	
 	private void changeTeam() {
@@ -42,7 +45,9 @@ public class TurnManager {
 		}else if(currentTeam == Team.VAMPIRES){
 			currentTeam = Team.HUMANS;
 		}
-		System.out.println("Team changed: " + currentTeam.name());
+		if(Game.IS_DEBUG){
+			System.out.println("[Turn Manager] Team changed: " + currentTeam.name());
+		}
 	}
 	
 	public void step(float dt) {

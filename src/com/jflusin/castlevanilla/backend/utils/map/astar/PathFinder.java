@@ -2,6 +2,7 @@ package com.jflusin.castlevanilla.backend.utils.map.astar;
 
 import java.util.ArrayList;
 
+import com.jflusin.castlevanilla.backend.main.Game;
 import com.jflusin.castlevanilla.backend.utils.B2DVars;
 import com.jflusin.castlevanilla.backend.utils.map.Frame;
 
@@ -85,14 +86,16 @@ public class PathFinder {
 		}
 		
 		if(found){
-			System.out.println("Chemin trouvé !");
+			if(Game.IS_DEBUG){
+				System.out.println("[A*] Chemin trouvé !");
+			}
 			current = end;
 			while(current.getX() != start.getX() || current.getY() != start.getY()){
 				path.add(current);
 				current = current.getParent();
 			}
-		}else{
-			System.out.println("Pas de chemin trouvé !");
+		}else if (Game.IS_DEBUG){
+			System.out.println("[A*] Pas de chemin trouvé !");
 		}
 		
 		

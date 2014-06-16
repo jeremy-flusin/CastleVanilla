@@ -13,15 +13,14 @@ import com.jflusin.castlevanilla.backend.controllers.PlayerController;
 import com.jflusin.castlevanilla.backend.controllers.VampireController;
 import com.jflusin.castlevanilla.backend.factory.HumanFactory;
 import com.jflusin.castlevanilla.backend.factory.VampireFactory;
-import com.jflusin.castlevanilla.backend.handlers.inputs.InputHandler;
 import com.jflusin.castlevanilla.backend.rules.Team;
 import com.jflusin.castlevanilla.backend.utils.SceneManager;
 import com.jflusin.castlevanilla.backend.views.scenes.AbstractScene;
 
 public class TestScene extends AbstractScene {
 	
-	private static final int NUMBER_OF_PLAYERS_IN_EACH_TEAM = 2;
-	Map<Team, ArrayList<PlayerController>> players;
+	private static final int NUMBER_OF_PLAYERS_IN_EACH_TEAM = 1;
+	private Map<Team, ArrayList<PlayerController>> players;
 	
 	public TestScene(SceneManager sm) {
 		super(sm);
@@ -62,21 +61,21 @@ public class TestScene extends AbstractScene {
 
 	@Override
 	public void handleInput() {
-		if(InputHandler.isClicked(0)){
-			turnManager.getCurrentPlayer().doesAction(1);
-			System.out.println(turnManager.getCurrentPlayer().getModel().getNickname() + " moved !");
-		}
-		
-		if(InputHandler.isClicked(1)){
-			turnManager.getCurrentPlayer().doesAction(2);
-			System.out.println(turnManager.getCurrentPlayer().getModel().getNickname() + " did an action !");
-		}
+		turnManager.getCurrentPlayer().handleInput();
 	}
 
 	@Override
 	public void update(float dt) {
 		super.update(dt);
 		handleInput();
+		ArrayList<PlayerController> humans = players.get(Team.HUMANS);
+		ArrayList<PlayerController> vampires = players.get(Team.HUMANS);
+		for (PlayerController playerController : humans) {
+			playerController.getEntity().update(dt);
+		}
+		for (PlayerController playerController : vampires) {
+			playerController.getEntity().update(dt);
+		}
 	}
 
 	@Override

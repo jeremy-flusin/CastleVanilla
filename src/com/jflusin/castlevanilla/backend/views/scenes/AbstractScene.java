@@ -20,6 +20,7 @@ import com.jflusin.castlevanilla.backend.utils.ContentManager;
 import com.jflusin.castlevanilla.backend.utils.SceneManager;
 import com.jflusin.castlevanilla.backend.utils.map.Door;
 import com.jflusin.castlevanilla.backend.utils.map.Frame;
+import com.jflusin.castlevanilla.backend.utils.map.GameMap;
 import com.jflusin.castlevanilla.backend.utils.map.Room;
 import com.jflusin.castlevanilla.backend.utils.map.Spawn;
 
@@ -43,6 +44,7 @@ public abstract class AbstractScene {
 	protected ArrayList<Room> rooms;
 	
 	protected World world;
+	private GameMap map;
 	
 	// Map
 	protected TiledMap tileMap;
@@ -110,6 +112,7 @@ public abstract class AbstractScene {
 			}
 			rooms.add(room);
 		}
+		map = new GameMap(rooms);
 	}
 	
 	private ArrayList<Frame> createFramesFromTilesInLayer(String layerName,
@@ -141,5 +144,21 @@ public abstract class AbstractScene {
 	
 	public ContentManager getContent(){
 		return cm;
+	}
+	
+	public ArrayList<Room> getRooms() {
+		return rooms;
+	}
+	
+	public ArrayList<Frame> getSpawns() {
+		return spawns;
+	}
+	
+	public ArrayList<Frame> getDoors() {
+		return doors;
+	}
+	
+	public GameMap getMap() {
+		return map;
 	}
 }

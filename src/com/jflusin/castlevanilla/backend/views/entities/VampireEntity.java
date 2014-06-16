@@ -11,13 +11,11 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.jflusin.castlevanilla.backend.controllers.HumanController;
-import com.jflusin.castlevanilla.backend.handlers.PlayerMovement;
+import com.jflusin.castlevanilla.backend.controllers.VampireController;
 import com.jflusin.castlevanilla.backend.handlers.animation.B2DSprite;
 import com.jflusin.castlevanilla.backend.utils.map.Frame;
 import com.jflusin.castlevanilla.backend.views.scenes.AbstractScene;
 
-//TODO: REFACTO
 public class VampireEntity extends PlayerEntity {
 
 	public VampireEntity(AbstractScene scene) {
@@ -34,6 +32,7 @@ public class VampireEntity extends PlayerEntity {
 		shape.setAsBox(spawn.getWidth()/ 2 /PPM, spawn.getHeight()/ 2 /PPM);
 		fdef.shape = shape;
 		fdef.friction = 0;
+		fdef.isSensor = true;
 		body = world.createBody(bdef);
 		body.createFixture(fdef);
 		createSprite(body);
@@ -54,39 +53,16 @@ public class VampireEntity extends PlayerEntity {
 	}
 
 	@Override
-	public HumanController getController() {
-		return (HumanController)super.getController();
+	public VampireController getController() {
+		return (VampireController)super.getController();
 	}
 
 	@Override
 	public void update(float dt) {
+		super.update(dt);
 		sprite.update(dt, !moving);
-		handleMovement();
 	}
 
-	private void handleMovement() {
-		if(movement != null){
-			if(!moving){
-				movement.step();
-				moving = true;
-			}
-			if(!movement.isArrived()){
-				moving = !getController().moveTowards(
-						movement.getCurrentDest());
-			}else{
-				moving = false;
-			}
-		}
-	}
-
-	public PlayerMovement getMovement() {
-		return movement;
-	}
-	
-	public void setMovement(PlayerMovement movement) {
-		this.movement = movement;
-	}
-	
 	@Override
 	public void render(SpriteBatch sb) {
 		sprite.render(sb);

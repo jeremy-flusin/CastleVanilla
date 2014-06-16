@@ -3,22 +3,21 @@ package com.jflusin.castlevanilla.backend.handlers;
 import java.util.ArrayList;
 
 import com.jflusin.castlevanilla.backend.utils.map.Frame;
-import com.jflusin.castlevanilla.backend.utils.map.astar.Node;
 
 public class PlayerMovement {
 
-	private ArrayList<Node> path;
+	private ArrayList<Frame> path;
 	private int step = 0;
 	
-	public PlayerMovement(ArrayList<Node> path) {
+	public PlayerMovement(ArrayList<Frame> path) {
 		this.path = path;
 	}
 	
-	public void setPath(ArrayList<Node> path) {
+	public void setPath(ArrayList<Frame> path) {
 		this.path = path;
 	}
 	
-	public ArrayList<Node> getPath() {
+	public ArrayList<Frame> getPath() {
 		return path;
 	}
 	

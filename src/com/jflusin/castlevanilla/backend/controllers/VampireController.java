@@ -18,10 +18,4 @@ public class VampireController extends PlayerController {
 	public VampirePlayer getModel() {
 		return (VampirePlayer)super.getModel();
 	}
-
-	@Override
-	public void handleInput() {
-		
-	}
-	
 }
